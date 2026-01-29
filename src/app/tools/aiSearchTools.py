@@ -52,6 +52,12 @@ def get_cosmos_client(endpoint: str | None, key: str | None = None):
         "Failed to authenticate to Cosmos DB using DefaultAzureCredential and no valid COSMOS_KEY was provided"
     )
 
+    # Use DefaultAzureCredential (supports managed identity, Azure CLI, etc.)
+    # This is required when Cosmos DB has local authorization (key-based auth) disabled
+    # credential = DefaultAzureCredential()
+    # client = CosmosClient(endpoint, credential=credential)
+    # return client
+
 
 def get_request_embedding(text: str) -> list[float] | None:
     """Call embedding endpoint and return the embedding vector or None on failure."""
